@@ -1,0 +1,2 @@
+2011. Aug. 25
++ 增加smarty config， /conf/smarty/*和/templates/TEMPLATE/conf/*下的配置文件合并到/tmp/template_config/config.ini.php

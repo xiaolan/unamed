@@ -9,7 +9,7 @@ return array(
     'left_delimiter'  => '<{', 
     'right_delimiter' => '}>',
     
-    ''                => 'config_dir',
+    'config_dir'      => MAIN_DIR.DS.'tmp'.DS.'template_config',
     
     'template_dir'    => ENTRY.DS.'templates'.DS.ini('base.theme'),
     'compile_dir'     => MAIN_DIR.DS.'tmp'.DS.'template_compiled',

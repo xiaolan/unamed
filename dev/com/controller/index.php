@@ -12,10 +12,7 @@
  */
 class IndexController {
     
-    public function index($a, $b) {
-        
-        dump(get_defined_vars());
-        
+    public function index() {
         $smarty = Template::init();
         $smarty->display('index/index.tpl');
         
