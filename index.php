@@ -32,7 +32,8 @@ require('./common_func.php');
 /*
  * 导入基础配置和常用函数
  */
-import('dev.vendor.ThinkPHP.functions');
+import('lib.vendor.ThinkPHP.functions');
+import('lib.vendor.ThinkPHP.extend');
 import('lib.org.shortcuts.ini');
 set_ini('base', import('conf.base'));
 

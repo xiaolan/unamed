@@ -11,12 +11,12 @@
  * @author xiaolan
  */
 
-import('dev.vendor.Smarty.Smarty');
+import('lib.vendor.Smarty.Smarty');
 import('lib.org.web.template.smarty_plugins');
 
 /*
  * @package lib.org.web.template.smarty.SmartyTemplateBackend
- * @
+ * 
  */
 
 class SmartyTemplateBackend extends Smarty {
