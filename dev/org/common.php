@@ -1,4 +1,4 @@
 <?php
-    import('lib.org.web.template_engine.factory');
-    import('lib.org.database.factory');
+    import('lib.bin.template_engine');
+    import('lib.bin.database');
 ?>

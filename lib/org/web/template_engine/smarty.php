@@ -77,7 +77,6 @@ class SmartyTemplateBackend extends Smarty {
         $output = MAIN_DIR.DS.'tmp'.DS.'template_config'.DS.$filename;
         $contents = preg_replace('/;(.*)/i', '', implode("\r\n", $contents));
         file_put_contents($output, $contents);
-        
     }
     
     private function get_ini_content($dir) {

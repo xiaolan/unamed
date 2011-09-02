@@ -34,6 +34,7 @@ abstract class URLRouter {
  */
 class DispatcherFactory {
 
+
     /*
      * DispatcherFactory::work()
      * @params string $url_type
@@ -66,23 +67,26 @@ class DispatcherFactory {
             exit('Controller does not exists');
         }
         
-        import('dev.org.common');
+        $controller_instance = new $controller_name();
         
-        $controllerInstance = new $controller_name();
-        
-        if(!method_exists($controllerInstance, $action)) {
+        if(!method_exists($controller_instance, $action)) {
             $action = 'index';
         }
         
         set_ini('runtime.object', $controller_name);
         set_ini('runtime.action', $action);
         
-        call_user_func_array(array($controllerInstance, $action), $result);
+        import('dev.org.common');
+        
+        call_user_func_array(array($controller_instance, $action), $result);
         
     }
 
     /**/
-    static public function get_url() {}
+    static public function get_url($action, $params = null) {
+        return call_user_func_array(array($URL_router_name = 
+        ucfirst(ini('base.url_style')).'URLRouter', 'get_url'), array($action, $params));
+    }
     
     static public function set_baseurl() {
         switch(ini('base.url_style')) {

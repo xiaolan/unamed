@@ -10,7 +10,9 @@
      * @usage  import('lib.vendor.smarty.Smarty#class');
      */
     function import($package) {
-        
+        static $_importPackages = array();
+        $pack = $package;
+
         $result = false;
         
         if(substr($package, 0, 3) == 'lib') {
@@ -18,8 +20,8 @@
             $dev_package = str_replace('.', DS, $dev_package);
             $dev_package = MAIN_DIR.DS.str_replace('#', '.', $dev_package).'.php';
             
-            if(file_exists_case($dev_package)) {
-                $result = require_cache($dev_package); 
+            if(file_exists_case($dev_package) && !key_exists($pack, $_importPackages)) {
+                $_importPackages[$pack] = require($dev_package);
             }
         }
         
@@ -27,12 +29,12 @@
             $package = str_replace('.', DS, $package);
             $package = MAIN_DIR.DS.str_replace('#', '.', $package).'.php';
 
-            if(file_exists_case($package)) {
-                $result = require_cache($package);
+            if(file_exists_case($package) && !key_exists($pack, $_importPackages)) {
+                $_importPackages[$pack] = require($package);
             }
         }
         
-        return $result;
+        return $_importPackages[$pack];
     }
     
     /*
@@ -62,8 +64,8 @@
             return $_instance[$class_name];
         }
         $dev_package = 'dev'.substr($package, 0, strlen($package)-3);
-
-        if(false === import($dev_package)) {
+        
+        if(!import($dev_package)) {
             import($package);
         }
         if(!class_exists($class_name)) {
@@ -89,25 +91,26 @@
         }
     }
     
+    function is_post($has_data = true) {
+        if($_SERVER['REQUEST_METHOD'] != 'POST') {
+            return false;
+        }
+        
+        if($has_data && $_POST) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    function r($package, $params = null) {
+        header('Location:'.DispatcherFactory::get_url($package, $params));
+        exit;
+    }
+    
     /***************************************
         以下部分代码来自ThinkPHP
     */
-    // 优化的require_once
-    function require_cache($filename) {
-        static $_importFiles = array();
-        $filename = realpath($filename);
-        if (!isset($_importFiles[$filename])) {
-            if (file_exists_case($filename)) {
-                $_importFiles[$filename] = true;
-                return require $filename;
-            } else {
-                $_importFiles[$filename] = false;
-                return false;
-            }
-        }
-        
-        return true;
-    }
 
     // 区分大小写的文件存在判断
     function file_exists_case($filename) {
@@ -120,6 +123,5 @@
         }
         return false;
     }
-    
     
 ?>

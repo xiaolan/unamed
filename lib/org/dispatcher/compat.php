@@ -20,7 +20,10 @@ class CompatURLRouter extends URLRouter {
         return $result;
     }
     
-    static public function get_url($path, $params = null) { }
+    static public function get_url($path, $params = null) {
+        $path = str_replace('.', '/', $path);
+        return ini('base.url_root').'/index.php/'.$path.'/';
+    }
     
 }
 
