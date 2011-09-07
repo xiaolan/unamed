@@ -12,16 +12,14 @@
  */
 
 import('lib.vendor.Smarty.Smarty');
-import('lib.org.web.template.smarty_plugins');
+import('lib.org.web.template_engine.smarty_plugins');
 
-/*
+/**
  * @package lib.org.web.template.smarty.SmartyTemplateBackend
- * 
  */
-
 class SmartyTemplateBackend extends Smarty {
     
-    /*
+    /**
      * SmartyTemplateBackend::init();
      * 
      * 实例化smarty, 调用载入smarty配置， 调用载入smarty常用插件
@@ -29,21 +27,22 @@ class SmartyTemplateBackend extends Smarty {
      * @access public
      * @return object $this
      */
-    public function init() {
+    public function __construct() {
         parent::__construct();
         $this->configure();
         $this->load_common_plugins();
         return $this;
     }
     
-    /*
+    /**
      * 配置smarty， 并且合并基础smarty ini配置和模板中配置
      * 
      * @return void
      */
     private function configure() {
-        $conf = import('conf.smarty');
-        foreach($conf as $k => $v) {
+        $conf = import('conf.template');
+        
+        foreach($conf as $k=>$v) {
             $this->$k = $v;
         }
         set_ini('template.smarty', $conf);
@@ -51,6 +50,7 @@ class SmartyTemplateBackend extends Smarty {
         /*
          * 合并ini配置文件到smarty配置目录
          */
+        $this->assign('ini', ini());
         $this->merge_template_ini();
     }
     
@@ -64,7 +64,7 @@ class SmartyTemplateBackend extends Smarty {
      */
     public function merge_template_ini($filename = 'config.ini.php') {
         $base_config_dir = MAIN_DIR.DS.'conf'.DS.'smarty'.DS;
-        $template_config_dir = MAIN_DIR.DS.'templates'.DS.ini('base.theme').DS.'conf'.DS;
+        $template_config_dir = MAIN_DIR.DS.'templates'.DS.ini('base.theme').DS.'_conf'.DS;
         
         $contents = array(
             $this->get_ini_content($base_config_dir),
@@ -77,6 +77,7 @@ class SmartyTemplateBackend extends Smarty {
         $output = MAIN_DIR.DS.'tmp'.DS.'template_config'.DS.$filename;
         $contents = preg_replace('/;(.*)/i', '', implode("\r\n", $contents));
         file_put_contents($output, $contents);
+        
     }
     
     private function get_ini_content($dir) {
@@ -87,6 +88,7 @@ class SmartyTemplateBackend extends Smarty {
                 continue;
             }
             $data = parse_ini_file($dir.$file, true);
+            $str = '';
             foreach($data as $section=>$d) {
                 if(is_array($d)) {
                     $str.= "[{$section}]\r\n";
@@ -106,7 +108,9 @@ class SmartyTemplateBackend extends Smarty {
     /*
      * 载入常用的smarty插件
      */
-    private function load_common_plugins() {}
+    private function load_common_plugins() {
+        $this->registerPlugin('function', 'url', 'smarty_function_url');
+    }
     
 }
 
