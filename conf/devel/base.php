@@ -6,9 +6,9 @@
         /**/
         'url_style' => 'compat',
         /**/
-        'media_url' => 'http://www.domain.com/statics/',
+        'media_url' => 'http://127.0.0.1/unamed/statics/',
         /*theme*/
-        'theme'     => 'default',
+        'theme'     => $_GET['theme'] ? $_GET['theme'] : 'default',
         /*是否使用编译import文件*/
         'use_compile'   => true
     );

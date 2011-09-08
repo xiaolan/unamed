@@ -1,23 +1,54 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * @package lib.bin.cache.CacheInterface
  */
-
 if(!interface_exists('CacheInterface')) {
     Interface CacheInterface {
     
+        /**
+         * 写缓存
+         * 
+         * @param string $key
+         * @param mixed $value
+         * @return void
+         */
         public function set($key, $value);
 
+        /**
+         * 获得缓存
+         * 
+         * @param string $key
+         * @return mixed
+         */
         public function get($key);
 
+        /**
+         * 是否已经缓存
+         * @param string $key
+         * @return boolean
+         */
         public function cached($key);
+        
+        /**
+         * 清除缓存
+         * @param string $key
+         * @return boolean
+         */
+        public function clear($key);
+        
+        /**
+         * 清除所有缓存
+         * @return boolean
+         */
+        public function clear_all();
 
     }
 }
 
-
+/**
+ * @package lib.bin.cache.CacheBackend
+ */
 if(!class_exists('CacheBackend')) {
     class CacheBackend {
         public function __construct($conf_key) {
@@ -30,8 +61,17 @@ if(!class_exists('CacheBackend')) {
     }
 }
 
+/**
+ * @package lib.bin.cache.Cache
+ */
 if(!class_exists('Cache')) {
     class Cache {
+        /**
+         * 通过单件模式 调用缓存实例
+         * 
+         * @param string $driver
+         * @return object instance of some cache backend
+         */
         static public function init($driver = 'file') {
             if(!ini('cache')) {
                 set_ini('cache', import('conf.cache'));

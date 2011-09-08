@@ -13,10 +13,8 @@
 class IndexController {
     
     public function index() {
-    	
         $smarty = Template::init();
         $smarty->display('index/index.tpl');
-        
     }
 }
 

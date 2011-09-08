@@ -35,11 +35,11 @@ class Compiler {
         self::$runtime_cache = Cache::init('runtime');
         if(self::$runtime_cache->cached(self::$cache_key)) {
             self::$compiled = self::$runtime_cache->get(self::$cache_key);
-            
         }
         
         if(!self::$compiled) {
             $compiled = import('conf.compile');
+            $compiled = $compiled ? $compiled : array();
             foreach($compiled as $v) {
                 self::compile_file($v);
             }
@@ -60,7 +60,7 @@ class Compiler {
      * @todo 在第一次写入编译文件时会在等待磁盘IO时重复刷新
      */
     static public function work() {
-        if(self::expire() && ini('base.use_compile')) {
+        if(self::expire()) {
             return true;
         }
         
@@ -77,25 +77,22 @@ class Compiler {
         }
         
         /**
+         * 将已编译的文件写入缓存
+         */
+        self::$runtime_cache->set(self::$cache_key, self::$compiled);
+        /**
          * 写入编译缓存
          */
         $cache_path = get_realpath(self::$file_name);
         $fp = fopen($cache_path, 'w');
         if(flock($fp, LOCK_EX)) {
-            fwrite($fp, $output_content);
-            if(flock($fp, LOCK_UN)) {
+            $rs = fwrite($fp, $output_content);
+            if($rs && flock($fp, LOCK_UN)) {
+                
                 /**
-                 * 将已编译的文件写入缓存
-                 */
-                self::$runtime_cache->set(self::$cache_key, self::$compiled);
-                /**
-                 * 第一次写入编译文件， 休眠3秒以保证文件完全写入
                  * 重新载入页面， 使编译文件生效
                  */
-                sleep(3);
-                echo <<<EOF
-            <script type="text/javascript">window.location.reload();</script>
-EOF;
+                header('Refresh');
             }
         }
         fclose($fp);
@@ -104,9 +101,10 @@ EOF;
     static public function expire() {
         $not_expired = false;
         foreach(self::$compiled as $k=>$v) {
-            if(md5_file($v['file_path']) !== $v['hash']) {
+            $hash = md5_file($v['file_path']);
+            if($hash !== $v['hash']) {
+                self::$compiled[$k]['hash'] = $hash;
                 $not_expired = true;
-                break;
             }
         }
         if(!$not_expired && file_exists_case(get_realpath(self::$file_name))) {

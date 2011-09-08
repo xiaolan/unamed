@@ -45,8 +45,13 @@ class SmartyTemplateBackend extends Smarty {
         foreach($conf as $k=>$v) {
             $this->$k = $v;
         }
-        set_ini('template.smarty', $conf);
         
+        if(!is_dir($this->template_dir)) {
+            $this->template_dir = get_realpath('templates.default', '');
+        }
+        
+        
+        set_ini('template.smarty', $conf);
         /*
          * 合并ini配置文件到smarty配置目录
          */
@@ -62,9 +67,13 @@ class SmartyTemplateBackend extends Smarty {
      * 
      * @param string $filename = 'config.ini.php';
      */
-    public function merge_template_ini($filename = 'config.ini.php') {
+    public function merge_template_ini($filename = 'config#ini') {
         $base_config_dir = MAIN_DIR.DS.'conf'.DS.'smarty'.DS;
-        $template_config_dir = MAIN_DIR.DS.'templates'.DS.ini('base.theme').DS.'_conf'.DS;
+        $template_config_dir = get_realpath('template.'.ini('base.theme').'._conf');
+        
+        if(!is_dir($template_config_dir)) {
+            $template_config_dir = get_realpath('templates.default._conf', '');
+        }
         
         $contents = array(
             $this->get_ini_content($base_config_dir),
@@ -73,8 +82,7 @@ class SmartyTemplateBackend extends Smarty {
         if(!$contents) {
             return false;
         }
-        
-        $output = MAIN_DIR.DS.'tmp'.DS.'template_config'.DS.$filename;
+        $output = get_realpath('tmp.template_config.'.$filename);
         $contents = preg_replace('/;(.*)/i', '', implode("\r\n", $contents));
         file_put_contents($output, $contents);
         

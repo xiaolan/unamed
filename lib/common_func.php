@@ -50,18 +50,17 @@
     /**
      * 根据框架规则 返回绝对路径
      */
-    function get_realpath($package) {
+    function get_realpath($package, $ext = '.php') {
         $package = str_replace('.', DS, $package);
         
         /**
          * 优先调用DEV
          */
         $dev_package = preg_replace('/lib\./', 'dev.', $package);
-        $file_path = MAIN_DIR.DS.str_replace('#', '.', $dev_package).'.php';
+        $file_path = MAIN_DIR.DS.str_replace('#', '.', $dev_package).$ext;
         if(!file_exists_case($file_path)) {
-            $file_path = MAIN_DIR.DS.str_replace('#', '.', $package).'.php';
+            $file_path = MAIN_DIR.DS.str_replace('#', '.', $package).$ext;
         }
-        
         return $file_path;
     }
     

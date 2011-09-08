@@ -13,8 +13,17 @@ return array(
     'lib.vendor.ThinkPHP.functions',
     'lib.vendor.ThinkPHP.extend',
     
+    'lib.bin.database',
+    'lib.org.database.pdo',
+    
     'lib.bin.cache',
+    
     'lib.bin.dispatcher',
+    'lib.org.dispatcher.compat',
+    
+    'lib.org.web.paginator',
+    'lib.org.web.session',
+    
     'lib.bin.i18n',
     'lib.bin.log',
 );
