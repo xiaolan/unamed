@@ -25,6 +25,7 @@ return array(
     'lib.org.web.session',
     
     'lib.bin.i18n',
+    'lib.org.i18n.default',
     'lib.bin.log',
 );
 

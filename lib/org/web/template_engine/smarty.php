@@ -118,6 +118,7 @@ class SmartyTemplateBackend extends Smarty {
      */
     private function load_common_plugins() {
         $this->registerPlugin('function', 'url', 'smarty_function_url');
+        $this->registerPlugin('modifier', 'lang', 'smarty_modifier_lang');
     }
     
 }

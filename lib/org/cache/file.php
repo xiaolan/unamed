@@ -6,7 +6,7 @@
  */
 class FileCacheBackend extends CacheBackend implements CacheInterface{
     
-    public $cache_prefix = 'tmp.runtime.cache.';
+    public $cache_prefix = 'tmp.cache.';
     
     public $cache_life;
     

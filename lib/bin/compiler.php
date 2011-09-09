@@ -18,7 +18,7 @@ class Compiler {
      */
     static private $compiled = array();
     
-    static private $file_name= 'tmp.runtime.~compiled';
+    static private $file_name= 'tmp.~compiled';
     
     static private $cache_key = 'compiled_files';
     

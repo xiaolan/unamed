@@ -13,10 +13,13 @@
  *  {%url action='auth.index' params=$array%}
  * </code>
  */
-function smarty_function_url($params, $smarty) {
+function smarty_function_url($params, &$smarty) {
     return DispatcherFactory::get_url($params['action'], $params['params']);
 }
 
+function smarty_modifier_lang($lang, $package = 'common') {
+    return _g($lang, $package);
+}
 
 
 ?>

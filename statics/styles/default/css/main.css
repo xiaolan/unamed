@@ -1,8 +1,38 @@
-html{background:#efefef;color:#666;}
+html{background:url(../images/bg.gif) no-repeat 0 -50px fixed #1a1b1f;color:#666;padding-bottom:20px;}
+body{font-family: Verdana,'宋体'}
 
-#main-wrap{background:#fff; border-right:1px solid #ddd;border-bottom:1px solid #ddd;width:600px;margin:0 auto;padding:20px;margin-top:50px;}
-#header{font-size:24px;font-weight:bold;line-height:50px;height:50px;text-align:center;margin-bottom:30px;}
+#main-wrap{background:#fff; border-right:1px solid #ddd;border-bottom:1px solid #ddd;width:940px;margin:60px auto 0;padding:20px;
+    -moz-border-radius: 11px;
+    -webkit-border-radius: 11px;
+    border-radius: 11px;
+    behavior:url(ie-border-radius.htc)
+}
+
+#header{position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+z-index: 0;
+background-color: #333;
+background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#333), to(#111)); /* Webkit */
+background-image: -moz-linear-gradient(#333, #111); /* FF3.6 */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#111111'); /* IE6,IE7 */
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#111111')"; /* IE8 */
+box-shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1);
+-moz-box-shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1);
+-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1); 
+height:35px;line-height:35px;color:#fff;overflow:hidden;
+position:fixed;
+}
+#header-inner{width:1000px;margin:0 auto;}
+#logo{font-family: "Fontdiner Swanky"; font-size:26px;}
 
 #article{padding-bottom:20px;}
-#article-left{width:400px;padding-right:20px;border-right:1px dashed #ddd;margin-right:20px;}
-#article-right{width:120px;}
+#article img{-moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px;}
+#article-left{width:650px;padding-right:20px;border-right:1px dashed #ddd;margin-right:20px;}
+#article-right{width:249px;}
+
+#footer{text-align:center; color:#efefef;padding:10px;}
+#footer a, #footer a:visited{color:#efefef}
+#footer a:hover{background:none;}
