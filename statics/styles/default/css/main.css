@@ -1,5 +1,5 @@
 html{background:url(../images/bg.gif) no-repeat 0 -50px fixed #1a1b1f;color:#666;padding-bottom:20px;}
-body{font-family: Verdana,'宋体'}
+body, pre{font-family: Verdana,'宋体';line-height:180%;}
 
 #main-wrap{background:#fff; border-right:1px solid #ddd;border-bottom:1px solid #ddd;width:940px;margin:60px auto 0;padding:20px;
     -moz-border-radius: 11px;
@@ -26,9 +26,11 @@ height:35px;line-height:35px;color:#fff;overflow:hidden;
 position:fixed;
 }
 #header-inner{width:1000px;margin:0 auto;}
+#header a, #header a:visited{color:#fff;background:none;display:inline;float:left;height:35px;line-height:35px;padding:0 10px;}
+#header a:hover{background:#333;}
+#navigator{padding-left:20px;}
 #logo{font-family: "Fontdiner Swanky"; font-size:26px;}
 
-#article{padding-bottom:20px;}
 #article img{-moz-border-radius: 11px; -webkit-border-radius: 11px; border-radius: 11px;}
 #article-left{width:650px;padding-right:20px;border-right:1px dashed #ddd;margin-right:20px;}
 #article-right{width:249px;}
@@ -36,3 +38,5 @@ position:fixed;
 #footer{text-align:center; color:#efefef;padding:10px;}
 #footer a, #footer a:visited{color:#efefef}
 #footer a:hover{background:none;}
+
+#index-decoration p{font-size:16px;line-height:40px;height:40px;font-weight:bold;}

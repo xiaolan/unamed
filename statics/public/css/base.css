@@ -1,11 +1,18 @@
 .float-left{float:left; display:inline}
 .float-right{float:right; display:inline;}
-.clear{clear:both}
+.clear{clear:both;height:0.1px;overflow:hidden;line-height:0.1px;}
 
 .txt-c{text-align:center}
 .txt-l{text-align:left}
 .txt-r{text-align:right;}
 
-a, a:visited{text-decoration:none;color:#2888ff;padding:3px 2px 0px 2px;}
+a, a:visited{text-decoration:none;color:#2888ff;}
 a:hover{color:#fff;background:#2888ff}
 #for-ie6{padding:15px 5px 3px 5px;color:red;text-align:center;}
+
+.ml-20{margin-left:20px;}
+.mr-20{margin-right:20px;}
+.mt-20{margin-top:20px;}
+
+#kill-ie6{position:fixed;_position:absolute;width:140px;height:400px;top:200px;right:0px;background:#fff;padding:20px}
+#kill-ie6 .browsers a{display:block}

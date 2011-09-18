@@ -8,11 +8,9 @@ class FileCacheBackend extends CacheBackend implements CacheInterface{
     
     public $cache_prefix = 'tmp.cache.';
     
-    public $cache_life;
-    
     public $content_prefix = '<?php /* Cached By Unamed PHP Framework*/ die();?>';
     
-    public function set($key, $value) {
+    public function set($key, $value, $life=null) {
         import('lib.org.io.file');
         $content = $this->content_prefix.serialize($value);
         return FileIO::write($this->get_cache_path($key), $content);
@@ -28,7 +26,12 @@ class FileCacheBackend extends CacheBackend implements CacheInterface{
     }
     
     public function cached($key) {
-        return file_exists_case($this->get_cache_path($key));
+        $file = $this->get_cache_path($key);
+        $cached = file_exists_case($file);
+        if($cached && filemtime($file)+$this->life > CURRENT_TIMESTAMP) {
+            $cached = true;
+        }
+        return $cached;
     }
     
     public function clear($key) {

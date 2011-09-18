@@ -49,10 +49,6 @@ class Compiler {
         self::work();
         
         import(self::$file_name);
-        /**
-         * 注册程序结束时候的事件
-         */
-        //register_shutdown_function(array('Compiler', 'work'));
     }
     
     /**
@@ -98,7 +94,7 @@ class Compiler {
         fclose($fp);
     }
     
-    static public function expire() {
+    static private function expire() {
         $not_expired = false;
         foreach(self::$compiled as $k=>$v) {
             $hash = md5_file($v['file_path']);
@@ -125,7 +121,7 @@ class Compiler {
     /**
      * 运行时编译 写入需编译文件列表
      */
-    static public function compile_file($package) {
+    static private function compile_file($package) {
         if(!key_exists($package, self::$compiled)) {
             $file_path = get_realpath($package);
             if(!file_exists_case($file_path)) {

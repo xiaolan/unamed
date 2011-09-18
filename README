@@ -1,0 +1,2 @@
+extension: 扩展程序原有功能 - eg: login_require
+plugin: 插件 - 基于内置的插件机制 以及框架提供的API单独开发的功能 - 用于实现独立的功能 eg: contact form

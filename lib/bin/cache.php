@@ -4,6 +4,13 @@
  * @package lib.bin.cache.CacheInterface
  */
 if(!interface_exists('CacheInterface')) {
+    /*
+    public function get($key) {}
+    public function set($key, $value) {}
+    public function cached($key) {}
+    public function clear($key) {}
+    public function clear_all() {}
+    */
     Interface CacheInterface {
     
         /**
@@ -11,9 +18,10 @@ if(!interface_exists('CacheInterface')) {
          * 
          * @param string $key
          * @param mixed $value
+         * @param integer $life 缓存存活时间
          * @return void
          */
-        public function set($key, $value);
+        public function set($key, $value, $life=null);
 
         /**
          * 获得缓存

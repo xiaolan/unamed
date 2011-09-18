@@ -15,32 +15,34 @@
     <body>
         <div id="header">
             <div id="header-inner">
-                <div id="logo" class="float-left">Unamed</div>
-                <div id="navigator" class="float-left">Navigator area</div>
+                <div id="logo" class="float-left">Unamed PHP Framework</div>
+                <div id="navigator" class="float-left">
+                    <a href="#nogo">Home</a>
+                    <a href="#nogo">Documention</a>
+                    <div class="clear"></div>
+                </div>
                 <div id="account-info" class="float-right">
                     <{if $user->is_authenticated}>
                     <{else}>
-                        注册&nbsp;&nbsp;&nbsp;&nbsp;登陆
+                        <a href="<{url action="member.register"}>"><{'Register'|lang}></a>
+                        <a href="<{url action="member.login"}>"><{'Login'|lang}></a>
                     <{/if}>
+                    <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
             </div>
         </div>
-        <!--[if gt IE 6]>
-        <div id="for-gt-ie6"></div>
-        <![endif]-->
-        <!--[if lt IE 7]>
-        <div id="for-ie6">
-            <{'You are using unsafe web brower!'|lang}>
-        </div>
-        <![endif]-->
+        
         <div id="main-wrap">
             <div id="article">
                 <{block content}><{/block}>
             </div>
         </div>
         <div id="footer">
-            Copyright &copy; 2011 Unamed. Build on <a href="http://muyou.la/unamed-php-framework" target="_blank">Unamed PHP Framework</a>
+            Copyright &copy; 2011 Unamed. Build on <a href="http://muyou.la/unamed_php_framework" target="_blank">Unamed PHP Framework</a>
+        </div>
+        <div id="kill-ie6">
+            <script type="text/javascript" src="http://letskillie6.googlecode.com/svn/trunk/letskillie6.zh_CN.pack.js"></script>
         </div>
     </body>
 </html>

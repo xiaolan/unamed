@@ -75,6 +75,9 @@ Class FileIO {
         return @exec($command) ? true : false;
     }
     
+    /**
+     * 
+     */
     static public function upload($key = "upload_file") {
         
     }

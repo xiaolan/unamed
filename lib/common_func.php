@@ -74,30 +74,31 @@
      * @param string $suffix = 'Backend' 后缀
      * @return object instance of some object
      */
-    function singleton($package, $method = '', $params = array(), $suffix = 'Backend') {
-        static $_instance = array();
+    function singleton($package, $method = 'init', $params = array(), $suffix = 'Backend') {
+        static $_instances = array();
         $name = end(explode('.', $package));
         $class = $class_name = ucfirst($name).$suffix;
-        
-        if(key_exists($class_name, $_instance)) {
-            return $_instance[$class_name];
+        if(key_exists($class_name, $_instances)) {
+            return $_instances[$class_name];
         }
+        $dev_package = 'dev'.substr($package, 0, strlen($package)-3);
         
-        import($package);
+        if(!import($dev_package)) {
+            import($package);
+        }
         if(!class_exists($class_name)) {
             return false;
         }
-        
         if(!has_static_method($class_name, $method)) {
             $class = new $class_name($params);
         }
-        
+
         if($class) {
             $_instances[$class_name] = $class;
         } else {
             $_instances[$class_name] = call_user_func(array($class, $method), $params);
         }
-        
+
         return $_instances[$class_name];
     }
     

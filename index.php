@@ -5,6 +5,8 @@
      * @const RUN_MODE
      */
     define('RUN_MODE', 'devel');
+    
+    error_reporting(E_ALL^E_NOTICE);
 
     require './lib/entry.php';
     

@@ -20,7 +20,14 @@ class PdoBackend implements DatabaseDriver {
             /**
              * @todo Log 和 异常处理
              */
-            echo $e->getMessage();
+            $params = array(
+                $e->getMessage(),
+                $e->getCode()
+            );
+            $base_exception = singleton('lib.org.exception.base', $params);
+            $base_exception->file = __FILE__;
+            $base_exception->line = __LINE__;
+            $base_exception->work();
         }
         
         return $instance;
