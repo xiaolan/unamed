@@ -48,10 +48,10 @@ class DispatcherFactory {
         
         $result = call_user_func(array($URL_router_name, 'parseURL'), $url);
 
-        $controller = array_shift($result);
-        $action = array_shift($result);
+        $controller = @array_shift($result);
+        $action = @array_shift($result);
 
-        import('dev.org.common');
+        
         
         $controller = $controller ? $controller : 'index';
         $is_exists = import('dev.com.controller.'.$controller);
@@ -74,10 +74,13 @@ class DispatcherFactory {
         set_ini('runtime.object', $controller_name);
         set_ini('runtime.action', $action);
         
+        import('dev.org.common');
+        
         /**
          * 实例化控制器
          */
         $controller_instance = new $controller_name();
+        $result = is_array($result) ? $result : array();
         call_user_func_array(array($controller_instance, $action), $result);
     }
 

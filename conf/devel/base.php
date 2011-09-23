@@ -18,7 +18,7 @@
          */
         'media_url' => '/unamed/statics/',
         /**
-         * 
+         * 使用某个主题， 当存在$_GET['theme']时使用
          */
         'theme'     => $_GET['theme'] ? $_GET['theme'] : 'default',
         /**
@@ -35,9 +35,15 @@
         
         /**
          * 日志
+         * pack_size 以kb为单位
          */
         'log' => array(
             'error_enable' => true,
+            'save_path' => 'dev.log',
+            'pack_size' => 1024,
+            'log_fields'=> array(
+				'time', 'errno', 'file', 'line', 'message'
+			)
         ),
         
         /**

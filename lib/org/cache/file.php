@@ -8,7 +8,7 @@ class FileCacheBackend extends CacheBackend implements CacheInterface{
     
     public $cache_prefix = 'tmp.cache.';
     
-    public $content_prefix = '<?php /* Cached By Unamed PHP Framework*/ die();?>';
+    private $content_prefix = '<?php /* Cached By Unamed PHP Framework*/ die();?>';
     
     public function set($key, $value, $life=null) {
         import('lib.org.io.file');
