@@ -12,20 +12,8 @@ class IndexController {
         $node = sprintf("%s.%s.%s", ini('runtime.object'), ini('runtime.action'), 1);
         $operation = "uc";
         
-        RBAC::has_permission($node, $operation, $role_id);
+        $role_ids = array(1,2,3);
         
-        exit;
-        
-    	
-//     	import('lib.bin.log');
-//     	$log = Log::init();
-    	
-//     	$log->write(array(
-//     		'errno'=> 1121,
-//     		'file'=> __FILE__,
-//     		'line'=> __LINE__ ,
-//     		'message'=> 'oops~ has been guier lede~'
-//     	));
         
         $smarty = Template::init();
         $smarty->display('index/index.tpl');

@@ -52,16 +52,22 @@ class DispatcherFactory {
         $action = @array_shift($result);
 
         
-        
         $controller = $controller ? $controller : 'index';
         $is_exists = import('dev.com.controller.'.$controller);
         $controller_name = ucfirst($controller).'Controller';
         
         /**
-         * @todo 
+         * 如果不存在controller则判断是否为extension
          */
         if(false === $is_exists) {
-            exit('Controller does not exists');
+            $is_exists = import(sprintf('dev.org.extension.%s.controller', 
+                                                                $controller));
+            /**
+             * @todo
+             * */
+            if(!$is_exists) {
+                exit("Controller doesn't exists");
+            }
         }
         
         if(!method_exists($controller_name, $action)) {

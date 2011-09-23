@@ -3,10 +3,6 @@
     import('lib.bin.database');
     import('dev.com.model');
     
-    import('dev.com.object.member');
-    
-    import('dev.org.extension.RBAC.RBAC');
-    
-    RBAC::init(1);
-    
+    import('dev.org.extension.auth.RBAC');
+    RBAC::init();
 ?>

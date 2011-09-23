@@ -21,7 +21,7 @@ class NormalURLRouter extends URLRouter {
         }
         
         $i = 0;
-        if($_params) {
+        if($_params && is_array($params)) {
             foreach($_params as $k=>$v) {
                 if(!$k) {
                    $i+=1; 

@@ -77,7 +77,7 @@
     function singleton($package, $method = 'init', $params = array(), $suffix = 'Backend') {
         static $_instances = array();
         $name = end(explode('.', $package));
-        $class = $class_name = ucfirst($name).$suffix;
+        $class_name = ucfirst($name).$suffix;
         if(key_exists($class_name, $_instances)) {
             return $_instances[$class_name];
         }
@@ -93,12 +93,12 @@
             $class = new $class_name($params);
         }
 
-        if($class) {
+        if(is_object($class)) {
             $_instances[$class_name] = $class;
         } else {
-            $_instances[$class_name] = call_user_func(array($class, $method), $params);
+            $_instances[$class_name] = call_user_func(array($class_name, $method), $params);
         }
-
+        
         return $_instances[$class_name];
     }
     

@@ -19,9 +19,21 @@ abstract class BaseModel {
     private $prefix;
     
     /**
+     * 当前数据库连接对象
+     * */
+    protected $db;
+    
+    public function __construct() {
+        import('lib.bin.database');
+        $this->db = Database::init();
+    }
+    
+    /**
      * 抽象方法 继承此类必须实现此方法
      * */
     abstract protected function set();
+    
+    
     
     /**
      * 
