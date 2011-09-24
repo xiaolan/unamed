@@ -34,11 +34,21 @@ class RBAC {
     static public function need_login($role = null) {
         
         if(!self::$user->is_authenticated()) {
-            return false;
+            r('auth.login');
         }
         
-        if($role && !in_array($role, self::$user['roles'])) {
-            return false;
+        if($role && !is_array($role) && !key_exists($role, self::$user['roles'])) {
+            r('auth.login');
+        }
+        
+        if($role && is_array($role)) {
+            foreach(self::$user['roles'] as $k=>$v) {
+                if(key_exists($k, $role)) {
+                    return true;
+                }
+            }
+            
+            r('auth.login');
         }
         
         return true;

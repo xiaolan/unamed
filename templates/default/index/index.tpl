@@ -35,7 +35,7 @@
         <p>More links: </p>
             <p>- <a href="<{"documention"|url}>">Documention</a> - <a href="">Getting start</a></p>
             <p>- <a href="<{"documention"|url}>">Demo</a></p>
-            <p>- <a href="<{"documention.category.api"|url}>">API Reference</a></p>
+            <p>- <a href="<{"documention.showlist"|url:'category=api'}>">API Reference</a></p>
             <p>- <a href="">Extensions</a></p>
             <p>- <a href="">Pluggable</a></p>
             <p>- <a href="">Plugins</a></p>

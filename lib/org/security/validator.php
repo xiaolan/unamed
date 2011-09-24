@@ -8,9 +8,9 @@
  * Validation the data use php function or regex
  */
 
-interface Validator {
+interface ValidatorInterface {
     
-    static public function check($data, $rule) {}
+    static public function check($data, $rule);
     
 }
 
@@ -26,7 +26,7 @@ class Validator {
      * @variable array $message
      * Defined message template
      */
-    private $messages = array();
+    public $messages = array();
 
     private $is_valid = true;
 
@@ -50,7 +50,8 @@ class Validator {
             }
             
             $class_name = $type.'Validator';
-            $result = $class_name::check($data, $rule);
+            $object = new $class_name;
+            $result = $object->check($data, $rule);
             if(true !== $result) {
                 $this->is_valid = false;
                 $this->messages[] = @sprintf(_g($result), $name, $rule);

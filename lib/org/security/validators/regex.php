@@ -1,6 +1,6 @@
 <?php
 
-class RegexValidator implements Validator {
+class RegexValidator implements ValidatorInterface {
     
     static public function check($data, $rule) {
         if(preg_match($rule, $data)) {

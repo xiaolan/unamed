@@ -127,6 +127,10 @@
         header('Location:'.DispatcherFactory::get_url($package, $params));
         exit;
     }
+    
+    function is_email($email) {
+        return preg_match('/^[\_\.0-9a-zA-Z\-]+@[0-9a-z\-]+[a-z]{2,4}$/', $email);
+    }
 
     /***************************************
         以下部分代码来自ThinkPHP

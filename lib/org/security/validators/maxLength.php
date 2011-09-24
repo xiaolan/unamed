@@ -1,6 +1,6 @@
 <?php
 
-class maxLengthValidator implements Validator {
+class maxLengthValidator  implements ValidatorInterface {
     
     static public function check($data, $rule) {
         if(strlen($data) <= $rule) {

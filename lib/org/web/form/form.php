@@ -89,7 +89,7 @@ class BaseForm {
      * return the fields html
      */
     public function output() {
-        import('system/share/web/forms/fields');
+        import('lib.org.web.form.fields');
         $fields_html = array();
         foreach($this->fields as $field_name=>$property) {
             $fields_html['content'][$field_name]
@@ -97,7 +97,7 @@ class BaseForm {
             $label = $this->fields[$field_name]['label']
                     ? $this->fields[$field_name]['label']
                     : $field_name;
-            $fields_html['label'][$field_name] = _($label);
+            $fields_html['label'][$field_name] = _g($label);
         }
         $fields_html['fields']  = $this->fields;
 
@@ -127,6 +127,7 @@ class BaseForm {
                 }
             }
         }
+        
         $this->is_cleaned = true;
         return $this->cleaned_data;
     }
@@ -177,7 +178,7 @@ class BaseForm {
         
         import('lib.org.security.validator');
         $validation_instance = new Validator();
-
+        
         foreach($this->fields as $name=> $field) {
             if(!$validation_instance->check($name, $field, $this->cleaned_data[$name])) {
                 $this->is_valid = false;
@@ -187,8 +188,8 @@ class BaseForm {
         if($this->is_valid === null) {
             $this->is_valid = true;
         }
-
-        $this->messages[] = $validation_instance->errors;
+        
+        $this->messages = $validation_instance->messages;
 
         return $this->is_valid;
     }

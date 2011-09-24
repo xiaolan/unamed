@@ -15,6 +15,9 @@ class AuthController {
         import('dev.org.extension.model.user');
         $this->user = get_instance_of('RBACUser');
         
+        /**
+         * 动态修改smarty的模板目录
+         * */
         $this->smarty = Template::init();
         $this->smarty->assign('base_template_dir', $this->smarty->template_dir);
         $this->smarty->assign('layout', $this->smarty->template_dir.
@@ -27,12 +30,11 @@ class AuthController {
      * */
     public function login() {
         if($this->user->is_authenticated()) {
-            //redirect
             r('index');
         }
         
-        import('lib.org.web.html.form');
-        $form = new NormalForm($_POST);
+        import('lib.org.web.form.form');
+        $form = new BaseForm($this->smarty, $_POST);
         $form->fields = array(
             'username'=> array(
                 'type' => 'text',
@@ -47,22 +49,20 @@ class AuthController {
         );
         
         if(is_post()) {
-            $valid_result = $form->valid();
-            if(true !== $valid_result) {
-                $this->smarty->assign('error_message', $valid_result);
+            if(true != $form->is_valid()) {
+                $this->smarty->assign('error_message', $form->messages);
             } else {
                 $auth = $this->user->authenticate($form->cleaned_data['username'],
                                           $form->cleaned_data['password']);
                 if(true !== $auth) {
-                    r('index');
-                } else {
                     $this->smarty->assign('error_message', $auth);
+                } else {
+                    r('index');
                 }
             }
         }
         
-        $this->smarty->assign('login_form', $form);
-        $this->smarty->assign('CSRF_TOKEN', CSRF::generate());
+        $this->smarty->assign('login_form', $form->output());
         $this->smarty->display('login.tpl');
     }
     

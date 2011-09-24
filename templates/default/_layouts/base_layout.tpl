@@ -17,15 +17,15 @@
             <div id="header-inner">
                 <div id="logo" class="float-left">Unamed PHP Framework</div>
                 <div id="navigator" class="float-left">
-                    <a href="#nogo">Home</a>
-                    <a href="#nogo">Documention</a>
+                    <a href="<{'index'|url}>">Home</a>
+                    <a href="<{'article.category.documention'|url}>">Documention</a>
                     <div class="clear"></div>
                 </div>
                 <div id="account-info" class="float-right">
                     <{if $user->is_authenticated}>
                     <{else}>
-                        <a href="<{"member.register"|url}>"><{'Register'|lang}></a>
-                        <a href="<{"member.login"|url}>"><{'Login'|lang}></a>
+                        <a href="<{"auth.register"|url}>"><{'Register'|lang}></a>
+                        <a href="<{"auth.login"|url}>"><{'Login'|lang}></a>
                     <{/if}>
                     <div class="clear"></div>
                 </div>
