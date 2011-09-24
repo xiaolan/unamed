@@ -18,14 +18,13 @@ class RBACUser extends BaseModel {
     }
     
     /**
-     * 认证网管
+     * 认证
      * 
      * @param string $username_or_email
      * @param string $password
      * @param string $field username | email
      * */
-    public function authenticate($username_or_email, $password, 
-                                                        $field = 'username') {
+    public function authenticate($username_or_email, $password) {
         
     }
     

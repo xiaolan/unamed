@@ -33,9 +33,9 @@
         </div>
         <div class="float-right mr-20" style="_margin-top:-230px">
         <p>More links: </p>
-            <p>- <a href="<{url action="documention"}>">Documention</a> - <a href="">Getting start</a></p>
-            <p>- <a href="<{url action="documention"}>">Demo</a></p>
-            <p>- <a href="<{url action="documention.category.api"}>">API Reference</a></p>
+            <p>- <a href="<{"documention"|url}>">Documention</a> - <a href="">Getting start</a></p>
+            <p>- <a href="<{"documention"|url}>">Demo</a></p>
+            <p>- <a href="<{"documention.category.api"|url}>">API Reference</a></p>
             <p>- <a href="">Extensions</a></p>
             <p>- <a href="">Pluggable</a></p>
             <p>- <a href="">Plugins</a></p>

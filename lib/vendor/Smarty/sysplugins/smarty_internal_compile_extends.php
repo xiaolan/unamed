@@ -40,7 +40,8 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
 
         $_smarty_tpl = $compiler->template;
         $include_file = null;
-        if (strpos($_attr['file'],'$_tmp') !== false || strpos($_attr['file'],'$_smarty_tpl') !== false || strpos($_attr['file'],'::') !== false) {
+        //if (strpos($_attr['file'],'$_tmp') !== false || strpos($_attr['file'],'$_smarty_tpl') !== false || strpos($_attr['file'],'::') !== false) {
+        if (strpos($_attr['file'],'$_tmp') !== false || strpos($_attr['file'],'::') !== false) {
         	$this->compiler->trigger_template_error('a variable file attribute is illegal', $this->compiler->lex->taglineno);
         }
         eval('$include_file = ' . $_attr['file'] . ';');

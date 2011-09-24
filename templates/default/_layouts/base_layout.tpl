@@ -24,8 +24,8 @@
                 <div id="account-info" class="float-right">
                     <{if $user->is_authenticated}>
                     <{else}>
-                        <a href="<{url action="member.register"}>"><{'Register'|lang}></a>
-                        <a href="<{url action="member.login"}>"><{'Login'|lang}></a>
+                        <a href="<{"member.register"|url}>"><{'Register'|lang}></a>
+                        <a href="<{"member.login"|url}>"><{'Login'|lang}></a>
                     <{/if}>
                     <div class="clear"></div>
                 </div>

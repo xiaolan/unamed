@@ -6,9 +6,29 @@
  */
 class CSRF {
     
-    static public function generate() {}
+    static public $token;
     
-    static public function check() {}
+    static public $session_key;
+    
+    static public function init($key = 'CSRF_TOKEN') {
+        self::$session_key = $key ? $key : 'CSRF_TOKEN';
+        
+        import('lib.bin.session');
+        Session::start();
+        self::$token = $_SESSION[self::$session_key];
+    }
+    
+    /**
+     * 生成MD5字符串
+     * */
+    static public function generate() {
+        self::$token = $_SESSION[self::$session_key] = md5(CURRENT_TIMESTAMP);
+        return self::$token;
+    }
+    
+    static public function check($data) {
+        return $data === self::$token;
+    }
     
 }
 

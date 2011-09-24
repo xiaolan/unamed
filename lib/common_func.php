@@ -123,7 +123,7 @@
         return false;
     }
     
-    function r($package, $params = null) {
+    function r($package = null, $params = null) {
         header('Location:'.DispatcherFactory::get_url($package, $params));
         exit;
     }
