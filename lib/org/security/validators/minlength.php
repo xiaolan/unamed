@@ -1,6 +1,6 @@
 <?php
 
-class minLengthValidator implements ValidatorInterface {
+class minlengthValidator implements ValidatorInterface {
     
     static public function check($data, $rule) {
         if(strlen($data) >= $rule) {

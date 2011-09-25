@@ -17,7 +17,7 @@ class BaseFields {
 
     static private $enable_property = array(
         'minlength', 'maxlength', 'rule', 'value', 'rows', 'cols', 'width',
-        'height', 'style', 'class'
+        'height', 'style', 'class', 'placeholder'
     );
 
     /*
@@ -65,7 +65,7 @@ class BaseFields {
                     ($key =='value' && in_array($property['type'], $value_skip))) {
                 continue;
             }
-            if($key=='value' && !$data_exists) {
+            if(($key=='value' || $key=='placeholder') && !$data_exists) {
                 $other = sprintf(' placeholder="%s" ', $value, $value, $value);
                 self::$extra.= $other;
             } else {

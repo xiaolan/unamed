@@ -9,13 +9,16 @@
         <link href="<{$ini.base.media_url}>public/css/base.css" type="text/css" rel="stylesheet" />
         <link href="<{$ini.base.media_url}>styles/default/css/main.css" type="text/css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Fontdiner%20Swanky">
+        <{block extra_style}><{$smarty.block.child}><{/block}>
         <script type="text/javascript" src="<{$ini.base.media_url}>public/js/jquery.js?v=1.6.2"></script>
         <script type="text/javascript" src="<{$ini.base.media_url}>public/js/unamed.debugbar.js"></script>
     </head>
     <body>
         <div id="header">
             <div id="header-inner">
-                <div id="logo" class="float-left">Unamed PHP Framework</div>
+                <div id="logo" class="float-left">
+                    <a href="<{'index'|url}>">Unamed PHP Framework</a>
+                </div>
                 <div id="navigator" class="float-left">
                     <a href="<{'index'|url}>">Home</a>
                     <a href="<{'article.category.documention'|url}>">Documention</a>

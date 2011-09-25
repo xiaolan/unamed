@@ -39,12 +39,15 @@ class AuthController {
             'username'=> array(
                 'type' => 'text',
                 'required' => true,
-                'minLength'=> 6,
-                'maxLength'=> 20
+                'minlength'=> 6,
+                'maxlength'=> 20,
+                'placeholder'=> 'Enter your username',
+                'label'=> '用户名/邮箱'
             ), 
             'password'=> array(
                 'type' => 'password',
-                'required' => true
+                'required' => true,
+                'label'=> '密码'
             )
         );
         

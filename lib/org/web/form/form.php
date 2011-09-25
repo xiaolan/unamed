@@ -9,6 +9,8 @@
 class BaseForm {
     
     public $strip_tags = true;
+    
+    public $auto_protected = true;
 
     /*
      * @variable boolean $is_bound
